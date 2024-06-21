@@ -216,9 +216,9 @@ def make_module(
         context : dict[str | Var, Shape], allmodules : list[PTModule],
         program : Program
     ) -> PTModule:
-    mod = PTModule(name=flow.name, info=Info(f'Module corresponding to flow / sub-flow `{flow.name}`'))
+    mod = PTModule(name=name, info=Info(f'Module corresponding to flow / sub-flow `{flow.name}`'))
     
-    print(f'Building {name} ({flow.name})')
+    # print(f'Building {name} ({flow.name})')
     
     symbols = flow.proto.symbols
     params = flow.proto.args
@@ -232,7 +232,7 @@ def make_module(
         if is_instance_of(stmt, Let):
             mod.params.append(stmt.idts[0])
             init.append(PTAssignment(PTVar(stmt.idts[0], mod), f'{stmt.flow.name}()'))
-            print('here', type(program.getflow(stmt.flow)))
+            # print('here', type(program.getflow(stmt.flow)))
             
             already_made = False
             for each in allmodules:
@@ -241,7 +241,7 @@ def make_module(
             if not already_made:
                 allmodules.append(
                     make_module(
-                        stmt.idts[0], program.getflow(stmt.flow), 
+                        stmt.flow, program.getflow(stmt.flow), 
                         context[stmt.idts[0]], allmodules, program
                     )
                 )
