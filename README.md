@@ -1,7 +1,7 @@
 # PyTorch-backend
 ---
 
-A [flow](https://github.com/StealthyPanda/flow) plugin to build PyTorch models.
+A [flow](https://pypi.org/project/flow-toolkit/) plugin to build PyTorch models.
 
 
 ## Installation
